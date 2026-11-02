@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 2.0.0 - 2026-11-02
 
 - The app is called Trix Mini: app ID `no.tazk.trixmini`, data folder `Trix Mini`, shared folder `Trix Mini-data`, release files `Trix-Mini-macOS.zip` and `Trix-Mini-Windows.zip`, winget `elzacka.TrixMini`, repo `elzacka/trix-mini`. A data folder named `Trix` is not read
 - Jukselapp: a long line full of `[` shows at once
