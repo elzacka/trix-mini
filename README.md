@@ -25,8 +25,7 @@ each release lists their SHA-256.
 - macOS 15 or later: unzip, move `Trix Mini.app` to Applications, open. Signed with
   Apple Developer ID and notarized.
 - Windows: unzip and run `Trix Mini\Trix Mini.exe`: unsigned, so SmartScreen → More info
-  → Run anyway. winget: `winget install elzacka.TrixMini`, then `trix-mini` (Win+R),
-  once the package passes winget's review; winget checks the zip's SHA-256.
+  → Run anyway.
   Needs WebView2, built into Windows 10 and 11.
 
 ## Build
