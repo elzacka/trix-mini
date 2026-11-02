@@ -128,7 +128,7 @@ function renderShortcuts() {
     return { title, sections: id ? lookupShortcuts(parsed, id) : filterShortcuts(parsed, query) }
   })
   if (id && state.hotkey && comboId(state.hotkey, state.os) === id) {
-    lists[0].sections.push({ title: 'Trix', items: [{ title: 'Åpner Trix', keys: [[{ keys: hotkeyName() }]] }] })
+    lists[0].sections.push({ title: 'Trix Mini', items: [{ title: 'Åpner Trix Mini', keys: [[{ keys: hotkeyName() }]] }] })
   }
   const sections = lists.flatMap(l => l.sections)
   const count = sections.reduce((n, s) => n + s.items.length, 0)
@@ -274,7 +274,7 @@ async function saveEdit() {
   } catch (error) {
     $('editor-error').hidden = false
     $('editor-error').textContent = error === 'changed'
-      ? 'Fila er endret utenfor Trix. Kopier endringene dine, avbryt og åpne fila på nytt.'
+      ? 'Fila er endret utenfor Trix Mini. Kopier endringene dine, avbryt og åpne fila på nytt.'
       : String(error)
   }
 }
@@ -392,7 +392,7 @@ function captureKey(e) {
   }
   const key = eventKey(e)
   if (!key) return
-  // The order Trix and macOS menus use: ⌘⌃⌥⇧, and Win+Ctrl+Alt+Shift on Windows
+  // The order Trix Mini and macOS menus use: ⌘⌃⌥⇧, and Win+Ctrl+Alt+Shift on Windows
   const meta = e.metaKey && (state.os === 'mac' ? 'cmd' : 'win')
   const text = [meta, e.ctrlKey && 'ctrl', e.altKey && 'alt', e.shiftKey && 'shift', key].filter(Boolean).join(' ')
   state.queries[0] = formatKeys(text, state.os)[0]
@@ -416,7 +416,7 @@ async function setHotkey(hotkey) {
     state.hotkey = hotkey
     state.error = ''
   } catch {
-    state.error = `Trix kan ikke bruke ${formatKeys(hotkey, state.os)[0]}`
+    state.error = `Trix Mini kan ikke bruke ${formatKeys(hotkey, state.os)[0]}`
   }
   closeMenu()
   render()
@@ -452,7 +452,7 @@ document.addEventListener('click', e => {
   if (!$('menu').hidden && !e.target.closest('.menu-anchor')) closeMenu()
 })
 
-// The web engine's own menu (Reload, Open Link) is not Trix's; text fields keep copy and paste.
+// The web engine's own menu (Reload, Open Link) is not Trix Mini's; text fields keep copy and paste.
 document.addEventListener('contextmenu', e => {
   if (!e.target.closest('input, textarea')) e.preventDefault()
 })
@@ -484,7 +484,7 @@ document.addEventListener('keydown', e => {
   }
 })
 
-// The files are the user's: read them again each time Trix comes forward.
+// The files are the user's: read them again each time Trix Mini comes forward.
 window.addEventListener('focus', () => { if (!state.editing) load() })
 listen('opened', () => { if (!state.editing) $('query').select() })
 

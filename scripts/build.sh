@@ -1,5 +1,5 @@
 #!/bin/sh
-# Portable macOS build: dist/Trix-macOS.zip. Windows: .github/workflows/build.yml
+# Portable macOS build: dist/Trix-Mini-macOS.zip. Windows: .github/workflows/build.yml
 set -eu
 cd "$(dirname "$0")/.."
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -12,12 +12,12 @@ IDENTITY=$(security find-identity -v -p codesigning | sed -n 's/.*"\(Developer I
 [ -n "$IDENTITY" ] && export APPLE_SIGNING_IDENTITY="$IDENTITY"
 
 npx tauri build --target universal-apple-darwin --bundles app
-APP=src-tauri/target/universal-apple-darwin/release/bundle/macos/Trix.app
+APP="src-tauri/target/universal-apple-darwin/release/bundle/macos/Trix Mini.app"
 if [ -n "$IDENTITY" ]; then
-  UPLOAD="${TMPDIR:-/tmp}/trix-notarize.zip"
+  UPLOAD="${TMPDIR:-/tmp}/trix-mini-notarize.zip"
   ditto -c -k --keepParent "$APP" "$UPLOAD"
   xcrun notarytool submit "$UPLOAD" --keychain-profile trix --wait
   xcrun stapler staple "$APP"
 fi
-ditto -c -k --keepParent "$APP" dist/Trix-macOS.zip
+ditto -c -k --keepParent "$APP" dist/Trix-Mini-macOS.zip
 ls -lh dist

@@ -1,7 +1,7 @@
 # Jukselapp
 
 <!--
-Trix viser denne fila. Endre den som du vil.
+Trix Mini viser denne fila. Endre den som du vil.
 
 - ## Navn: Gruppe
 - ### Navn: Oppslag
@@ -9,7 +9,7 @@ Trix viser denne fila. Endre den som du vil.
 - Også: Andre navn, skilt med komma
 - #emneknagg #flere
 - **fet**, *kursiv*, [lenke](https://…)
-- Rekkefølgen i fila er rekkefølgen i Trix. A–Å i Trix sorterer alfabetisk.
+- Rekkefølgen i fila er rekkefølgen i Trix Mini. A–Å i Trix Mini sorterer alfabetisk.
 -->
 
 ## KI

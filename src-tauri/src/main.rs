@@ -28,14 +28,14 @@ mod system;
 #[cfg(target_os = "macos")]
 use tauri::RunEvent;
 
-/// The lists Trix writes when a file is missing; after that the files are the user's.
+/// The lists Trix Mini writes when a file is missing; after that the files are the user's.
 const FILES: [(&str, &str); 2] = [
     ("Hurtigtaster.md", include_str!("../../seed/Hurtigtaster.md")),
     ("Jukselapp.md", include_str!("../../seed/Jukselapp.md")),
 ];
 const SETTINGS: &str = "innstillinger.json";
 /// A folder by this name next to the app holds the lists instead, so they travel with it.
-const PORTABLE: &str = "Trix-data";
+const PORTABLE: &str = "Trix Mini-data";
 const DEFAULT_HOTKEY: &str = "CommandOrControl+Alt+T";
 
 #[derive(Serialize, Deserialize, Default)]
@@ -65,10 +65,10 @@ struct Loaded {
     system_error: String,
 }
 
-/// The folder Trix sits in: next to Trix.exe, or next to Trix.app.
+/// The folder Trix Mini sits in: next to Trix Mini.exe, or next to Trix Mini.app.
 fn app_dir() -> PathBuf {
     let exe = std::env::current_exe().expect("path of the running app");
-    // winget starts Trix through a link in its Links folder; the lists belong next to the real Trix.exe.
+    // winget starts Trix Mini through a link in its Links folder; the lists belong next to the real Trix Mini.exe.
     let exe = match fs::read_link(&exe) {
         Ok(target) => exe.parent().expect("folder of the link").join(target),
         Err(_) => exe,
@@ -80,14 +80,14 @@ fn app_dir() -> PathBuf {
 /// The user's app data folder, which needs no permission prompt and no cloud sync.
 fn user_dir() -> PathBuf {
     if cfg!(target_os = "macos") {
-        PathBuf::from(std::env::var_os("HOME").expect("HOME")).join("Library/Application Support/Trix")
+        PathBuf::from(std::env::var_os("HOME").expect("HOME")).join("Library/Application Support/Trix Mini")
     } else {
-        PathBuf::from(std::env::var_os("APPDATA").expect("APPDATA")).join("Trix")
+        PathBuf::from(std::env::var_os("APPDATA").expect("APPDATA")).join("Trix Mini")
     }
 }
 
 fn data_dir() -> PathBuf {
-    if let Some(dir) = std::env::var_os("TRIX_DATA_DIR") {
+    if let Some(dir) = std::env::var_os("TRIX_MINI_DATA_DIR") {
         return dir.into();
     }
     let portable = app_dir().join(PORTABLE);
@@ -127,7 +127,7 @@ fn file_path(name: &str) -> Result<PathBuf, String> {
 fn io_error(path: &Path, error: std::io::Error) -> String {
     match error.kind() {
         ErrorKind::PermissionDenied | ErrorKind::ReadOnlyFilesystem => {
-            format!("Trix har ikke tilgang til {}", path.display())
+            format!("Trix Mini har ikke tilgang til {}", path.display())
         }
         _ => format!("{}: {error}", path.display()),
     }
@@ -375,7 +375,7 @@ fn quit(app: AppHandle) {
     app.exit(0);
 }
 
-/// The panel shows only Trix; links that would open in it go to the browser.
+/// The panel shows only Trix Mini; links that would open in it go to the browser.
 fn build_panel(app: &AppHandle) -> tauri::Result<WebviewWindow> {
     let dev = app.config().build.dev_url.clone();
     let (navigating, opening) = (app.clone(), app.clone());
@@ -429,8 +429,8 @@ fn main() {
 
             let _ = register(app.handle(), &current_hotkey());
 
-            let open = MenuItem::with_id(app, "open", "Åpne Trix", true, None::<&str>)?;
-            let quit = MenuItem::with_id(app, "quit", "Avslutt Trix", true, None::<&str>)?;
+            let open = MenuItem::with_id(app, "open", "Åpne Trix Mini", true, None::<&str>)?;
+            let quit = MenuItem::with_id(app, "quit", "Avslutt Trix Mini", true, None::<&str>)?;
             let icon = if cfg!(target_os = "macos") {
                 Image::from_bytes(include_bytes!("../icons/tray.png"))?
             } else {
@@ -439,7 +439,7 @@ fn main() {
             TrayIconBuilder::with_id("tray")
                 .icon(icon)
                 .icon_as_template(cfg!(target_os = "macos"))
-                .tooltip("Trix")
+                .tooltip("Trix Mini")
                 .menu(&Menu::with_items(app, &[&open, &quit])?)
                 .show_menu_on_left_click(false)
                 .on_menu_event(|app, event| match event.id.as_ref() {
@@ -480,7 +480,7 @@ fn main() {
             _ => {}
         })
         .build(tauri::generate_context!())
-        .expect("Trix starts")
+        .expect("Trix Mini starts")
         .run(|_app, _event| {
             #[cfg(target_os = "macos")]
             if let RunEvent::Reopen { .. } = _event {
@@ -494,7 +494,7 @@ mod tests {
     use super::*;
 
     fn folder(name: &str) -> PathBuf {
-        let dir = std::env::temp_dir().join(format!("trix-test-{}-{name}", std::process::id()));
+        let dir = std::env::temp_dir().join(format!("trix-mini-test-{}-{name}", std::process::id()));
         let _ = fs::remove_dir_all(&dir);
         dir
     }

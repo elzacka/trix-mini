@@ -1,18 +1,18 @@
 #!/bin/sh
-# winget manifests for a published release: dist/winget/manifests/e/elzacka/Trix/<version>/, the layout of microsoft/winget-pkgs.
+# winget manifests for a published release: dist/winget/manifests/e/elzacka/TrixMini/<version>/, the layout of microsoft/winget-pkgs.
 set -eu
 cd "$(dirname "$0")/.."
 VERSION=${1:?usage: scripts/winget.sh <version>}
 TAG=v$VERSION
-ID=elzacka.Trix
+ID=elzacka.TrixMini
 SCHEMA=1.12.0
-OUT=dist/winget/manifests/e/elzacka/Trix/$VERSION
-URL=https://github.com/elzacka/trix/releases/download/$TAG/Trix-Windows.zip
+OUT=dist/winget/manifests/e/elzacka/TrixMini/$VERSION
+URL=https://github.com/elzacka/trix-mini/releases/download/$TAG/Trix-Mini-Windows.zip
 
 TMP=$(mktemp -d)
-gh release download "$TAG" -R elzacka/trix -p Trix-Windows.zip -D "$TMP"
-SHA=$(shasum -a 256 "$TMP/Trix-Windows.zip" | cut -d' ' -f1 | tr a-f A-F)
-DATE=$(gh release view "$TAG" -R elzacka/trix --json publishedAt -q '.publishedAt[:10]')
+gh release download "$TAG" -R elzacka/trix-mini -p Trix-Mini-Windows.zip -D "$TMP"
+SHA=$(shasum -a 256 "$TMP/Trix-Mini-Windows.zip" | cut -d' ' -f1 | tr a-f A-F)
+DATE=$(gh release view "$TAG" -R elzacka/trix-mini --json publishedAt -q '.publishedAt[:10]')
 mkdir -p "$OUT"
 
 cat > "$OUT/$ID.yaml" <<EOF
@@ -31,11 +31,11 @@ PackageVersion: $VERSION
 InstallerType: zip
 NestedInstallerType: portable
 NestedInstallerFiles:
-- RelativeFilePath: Trix\\Trix.exe
-  PortableCommandAlias: trix
+- RelativeFilePath: Trix Mini\\Trix Mini.exe
+  PortableCommandAlias: trix-mini
 UpgradeBehavior: uninstallPrevious
 Commands:
-- trix
+- trix-mini
 ReleaseDate: $DATE
 Installers:
 - Architecture: x64
@@ -52,20 +52,20 @@ PackageVersion: $VERSION
 PackageLocale: en-US
 Publisher: elzacka
 PublisherUrl: https://github.com/elzacka
-PublisherSupportUrl: https://github.com/elzacka/trix/issues
-PackageName: Trix
-PackageUrl: https://github.com/elzacka/trix
+PublisherSupportUrl: https://github.com/elzacka/trix-mini/issues
+PackageName: Trix Mini
+PackageUrl: https://github.com/elzacka/trix-mini
 License: MIT
-LicenseUrl: https://github.com/elzacka/trix/blob/main/LICENSE
+LicenseUrl: https://github.com/elzacka/trix-mini/blob/main/LICENSE
 ShortDescription: Tray app with your own keyboard shortcuts and a cheat sheet, read from Markdown files you edit. No network.
-Moniker: trix
+Moniker: trix-mini
 Tags:
 - cheat-sheet
 - keyboard-shortcuts
 - markdown
 - portable
 - tray
-ReleaseNotesUrl: https://github.com/elzacka/trix/releases/tag/$TAG
+ReleaseNotesUrl: https://github.com/elzacka/trix-mini/releases/tag/$TAG
 ManifestType: defaultLocale
 ManifestVersion: $SCHEMA
 EOF

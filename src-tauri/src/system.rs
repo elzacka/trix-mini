@@ -245,7 +245,7 @@ mod mac {
     pub fn list() -> Result<String, String> {
         let table = plist(&["-convert", "json", "-o", "-", &format!("{KEYBOARD}/no.lproj/DefaultShortcutsTable.xml")], None)
             .or_else(|| plist(&["-convert", "json", "-o", "-", &format!("{KEYBOARD}/en.lproj/DefaultShortcutsTable.xml")], None))
-            .ok_or("Trix finner ikke hurtigtastene i denne versjonen av macOS")?;
+            .ok_or("Trix Mini finner ikke hurtigtastene i denne versjonen av macOS")?;
         let names = plist(&["-extract", "no", "json", "-o", "-", &format!("{KEYBOARD}/DefaultShortcutsTable.loctable")], None)
             .and_then(|v| v.as_object().cloned())
             .unwrap_or_default();

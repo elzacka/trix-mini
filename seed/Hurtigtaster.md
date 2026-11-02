@@ -1,7 +1,7 @@
 # Hurtigtaster
 
 <!--
-Trix viser denne fila. Endre den som du vil.
+Trix Mini viser denne fila. Endre den som du vil.
 
 - ## Navn: Gruppe
 - - Navn | taster: Like taster på Windows og Mac
@@ -9,7 +9,7 @@ Trix viser denne fila. Endre den som du vil.
 - «eller» mellom to hurtigtaster for samme handling
 - "tekst" eller «tekst»: Vises som tekst, ikke som taster. Eksempel: "hold inne" ⌘W
 - \|: Tegnet | i et navn
-- Rekkefølgen i fila er rekkefølgen i Trix.
+- Rekkefølgen i fila er rekkefølgen i Trix Mini.
 - Taster: Symboler (⌘⇧S) eller ord (ctrl shift S, ctrl+shift+S)
 - Ord: ctrl, shift, alt, cmd, opt, win, fn, mellomrom, retur, tab, esc, slett, venstre, høyre, opp, ned, F1–F12
 -->
@@ -21,7 +21,7 @@ Trix viser denne fila. Endre den som du vil.
 - Skjermbilde av et utsnitt | win shift S | ⌘⇧4
 - Lås skjermen | win L | ⌃⌘Q
 
-## Trix
+## Trix Mini
 
 - Vis Hurtigtaster | ctrl 1 | ⌘1
 - Vis Jukselapp | ctrl 2 | ⌘2
@@ -30,4 +30,4 @@ Trix viser denne fila. Endre den som du vil.
 - Rediger lista | ctrl E | ⌘E
 - Lagre i redigering | ctrl S | ⌘S
 - Avbryt redigering | esc
-- Lukk, tøm søket eller skjul Trix | esc
+- Lukk, tøm søket eller skjul Trix Mini | esc

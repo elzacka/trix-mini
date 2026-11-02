@@ -28,12 +28,12 @@ jobs:
       - name: Portable folder
         shell: pwsh
         run: |
-          New-Item -ItemType Directory -Force dist/Trix | Out-Null
-          Copy-Item src-tauri/target/release/trix.exe dist/Trix/Trix.exe
-          Compress-Archive -Path dist/Trix -DestinationPath dist/Trix-Windows.zip
+          New-Item -ItemType Directory -Force "dist/Trix Mini" | Out-Null
+          Copy-Item src-tauri/target/release/trix-mini.exe "dist/Trix Mini/Trix Mini.exe"
+          Compress-Archive -Path "dist/Trix Mini" -DestinationPath dist/Trix-Mini-Windows.zip
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          path: dist/Trix-Windows.zip
+          path: dist/Trix-Mini-Windows.zip
           archive: false
 
   macos:
@@ -52,5 +52,5 @@ jobs:
       - run: scripts/build.sh
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          path: dist/Trix-macOS.zip
+          path: dist/Trix-Mini-macOS.zip
           archive: false
